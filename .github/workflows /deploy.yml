@@ -1,0 +1,45 @@
+name: FRONTEND CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies and build
+      run: |
+        npm install
+        npm run build
+
+    - name: Extract version from merge commit message
+      id: extract_version
+      run: |
+        VERSION=$(git log -1 --pretty=%B | grep -oP '(?<=Merge pull request #\d+ from .*\bv)\d+\.\d+\.\d+')
+        if [[ ! -z "$VERSION" ]]; then
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        fi
+
+    - name: Log in to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Build and push Docker image with version tag
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: |
+          chickennight/pants-fe:latest
+          chickennight/pants-fe:${{ env.VERSION }}
+        if: env.VERSION
