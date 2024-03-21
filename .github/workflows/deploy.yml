@@ -2,48 +2,64 @@ name: FRONTEND CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-        cache: 'pnpm'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "pnpm"
 
-    - name: Install pnpm
-      run: npm install -g pnpm@8
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
 
-    - name: Install dependencies and build
-      run: |
-        pnpm install
-        pnpm run build
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-    - name: Extract version from merge commit message
-      id: extract_version
-      run: |
-        VERSION=$(git log -1 --pretty=%B | grep -oP '(?<=Merge pull request #\d+ from .*\bv)\d+\.\d+\.\d+')
-        if [[ ! -z "$VERSION" ]]; then
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-        fi
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
-    - name: Log in to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Install dependencies and build
+        run: |
+          pnpm install
+          pnpm run build
 
-    - name: Build and push Docker image with version tag
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: |
-          chickennight/pants-fe:latest
-          chickennight/pants-fe:${{ env.VERSION }}
-        if: env.VERSION
+      - name: Extract version from merge commit message
+        id: extract_version
+        run: |
+          VERSION=$(git log -1 --pretty=%B | grep -oP '(?<=Merge pull request #\d+ from .*\bv)\d+\.\d+\.\d+')
+          if [[ ! -z "$VERSION" ]]; then
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+          fi
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push Docker image with version tag
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            chickennight/pants-fe:latest
+            chickennight/pants-fe:${{ env.VERSION }}
+          if: env.VERSION
