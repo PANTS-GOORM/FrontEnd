@@ -18,8 +18,8 @@ jobs:
 
     - name: Install dependencies and build
       run: |
-        npm install
-        npm run build
+        pnpm install
+        pnpm run build
 
     - name: Extract version from merge commit message
       id: extract_version
