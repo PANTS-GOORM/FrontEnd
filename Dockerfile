@@ -1,9 +1,10 @@
 FROM node:20 as build-stage
-WORKDIR /
-COPY package*.json ./
-RUN npm install
+WORKDIR /app
+RUN npm install -g pnpm
+COPY package*.json pnpm-lock.yaml ./
+RUN pnpm install
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/build /usr/share/nginx/html
