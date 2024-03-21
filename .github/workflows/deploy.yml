@@ -15,10 +15,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '20'
+        cache: 'pnpm'
 
     - name: Install dependencies and build
       run: |
-        npm install pnpm
         pnpm install
         pnpm run build
 
