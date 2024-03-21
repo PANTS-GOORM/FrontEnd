@@ -62,3 +62,5 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/pants-fe:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/pants-fe:${{ steps.extract_version.outputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
