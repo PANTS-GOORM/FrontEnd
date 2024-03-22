@@ -1,7 +1,13 @@
 import React from "react";
+import TypeModalButton from "../../components/Button/TypeModalButton";
 
 function Main() {
-  return <h1>메인 페이지</h1>;
+  return (
+    <div>
+      <h1>메인 페이지</h1>
+      <TypeModalButton />
+    </div>
+  );
 }
 
 export default Main;
