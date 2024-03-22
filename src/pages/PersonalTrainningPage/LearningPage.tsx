@@ -1,7 +1,7 @@
 import React from "react";
 
-function App() {
-  return <h1>잘 나옴?</h1>;
+function LearningPage() {
+  return <h1>개인 학습 페이지</h1>;
 }
 
-export default App;
+export default LearningPage;
