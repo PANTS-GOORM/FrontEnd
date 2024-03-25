@@ -9,21 +9,3 @@ jsDelivr CDN을 통해 WOFF2 포맷으로 로드합니다.
   font-weight: normal;
   font-style: normal;
 }
-
-/*
-'YEONGJUSeonbiTTF'글꼴 적용.
-배경이미지로 GIF 사용.
-*/
-body {
-  margin: 0;
-  font-family: YEONGJUSeonbiTTF;
-  background-image: url('/public/assets/img/background/backgroundImg.gif');
-  background-size: cover;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
