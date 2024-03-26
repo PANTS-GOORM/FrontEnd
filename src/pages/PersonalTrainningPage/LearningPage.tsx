@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import useStore from "../../store/learning";
+import VocabularyExplain from "../../components/features/Learning/VocabularyExplain/VocabularyExplain";
 
 const Learning: React.FC = () => {
   const words = useStore((state) => state.words); // Zustand 스토어에서 words 배열을 가져옵니다.
@@ -42,6 +43,7 @@ const Learning: React.FC = () => {
           ))}
         </ul>
       </div>
+      <VocabularyExplain />
     </div>
   );
 };
