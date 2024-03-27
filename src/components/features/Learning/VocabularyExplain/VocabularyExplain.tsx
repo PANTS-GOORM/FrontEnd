@@ -11,7 +11,7 @@ const explain = "하기가 매우 쉬운 것을 비유적으로 이르는 말";
 
 const VocabularyExplain = () => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-  
+
   return (
     <div className="flex justify-center items-center">
       <div className="flex items-center text-lg font-semibold bg-white bg-opacity-70 rounded p-4 text-center">
