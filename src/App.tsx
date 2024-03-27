@@ -12,12 +12,15 @@ function App() {
     <Router>
       <nav>
         <ul>
-          <li>
+          <div>
+            <Link to="/">Main</Link>
+          </div>
+          <div>
             <Link to="/learning">Learning</Link>
-          </li>
-          <li>
+          </div>
+          <div>
             <Link to="/admin">관리자 페이지</Link>
-          </li>
+          </div>
         </ul>
       </nav>
       <Routes>
