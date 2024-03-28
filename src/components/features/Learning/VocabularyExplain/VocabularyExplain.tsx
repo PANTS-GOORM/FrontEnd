@@ -13,7 +13,7 @@ const VocabularyExplain = () => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center">
       <div className="flex items-center text-lg font-semibold bg-white bg-opacity-70 rounded p-4 text-center">
         <div className="relative">
           <img
