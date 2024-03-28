@@ -26,7 +26,7 @@ const AnswerInput = () => {
   }, []);
 
   const checkSentence = () => {
-    if (hearts == 0) {
+    if (hearts === 0) {
       setWord("");
       return;
     }

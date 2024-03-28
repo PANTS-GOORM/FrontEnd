@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // Props 타입 정의
 // interface CurrentRoundProps {
@@ -9,7 +9,6 @@ import React, { useState } from "react";
 const round = 1;
 
 const CurrentRound = () => {
-  
   return (
     <div className="flex justify-center items-center">
       <div className="flex items-center text-lg bg-white bg-opacity-70 rounded p-4 text-center">

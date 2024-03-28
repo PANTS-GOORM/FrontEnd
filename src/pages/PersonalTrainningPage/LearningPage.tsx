@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import VocabularyExplain from "../../components/features/Learning/VocabularyExplain/VocabularyExplain";
 import CurrentRound from "../../components/features/Learning/CurrentRound/CurrentRound";
 import ImageContent from "../../components/features/Learning/ImageContent/ImageContent";
