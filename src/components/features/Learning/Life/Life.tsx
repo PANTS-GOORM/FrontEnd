@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import heartIcon from "../../../../assets/img/learning/heart.png";
 
 // Props 타입 정의
@@ -8,7 +8,7 @@ import heartIcon from "../../../../assets/img/learning/heart.png";
 // const CurrentRound: React.FC<CurrentRoundProps> = ({ round }) => {
 
 const Life = () => {
-  const [hearts, setHearts] = useState<number>(3);
+  const hearts = 3;
   const heartArr: React.ReactNode[] = [];
 
   for (let i = 0; i < hearts; ++i) {
