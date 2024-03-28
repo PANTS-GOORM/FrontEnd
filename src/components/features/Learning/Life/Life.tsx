@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import heartImage from "../../../../assets/img/learning/heart.png";
+import React from "react";
+import heartIcon from "../../../../assets/img/learning/heart.png";
 
 // Props 타입 정의
 // interface CurrentRoundProps {
@@ -8,9 +8,18 @@ import heartImage from "../../../../assets/img/learning/heart.png";
 // const CurrentRound: React.FC<CurrentRoundProps> = ({ round }) => {
 
 const Life = () => {
-  const [hearts, setHearts] = useState<number>(3);
+  const hearts = 3;
+  const heartArr: React.ReactNode[] = [];
 
-  return <div className="flex justify-center items-center mt-4">2</div>;
+  for (let i = 0; i < hearts; ++i) {
+    heartArr.push(
+      <img key={i} src={heartIcon} alt="Heart" className="w-16 h-16" />
+    );
+  }
+
+  return (
+    <div className="flex justify-center items-center mt-4">{heartArr}</div>
+  );
 };
 
 export default Life;
