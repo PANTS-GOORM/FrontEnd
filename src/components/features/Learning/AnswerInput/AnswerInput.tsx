@@ -33,7 +33,10 @@ const AnswerInput = () => {
   }, []);
 
   const checkSentence = () => {
-    if (hearts == 0) return;
+    if (hearts == 0) {
+      setWord("");
+      return;
+    }
 
     const desiredSentence = "누워서 떡 먹기"; // 공백 없는 형태로 설정
     // 사용자 입력에서 모든 공백을 제거
@@ -61,9 +64,9 @@ const AnswerInput = () => {
   };
 
   return (
-    <div className="flex items-center text-lg bg-white bg-opacity-20 rounded p-4 text-center h-auto">
+    <div className="flex flex-col items-center p-4 h-32">
       <form
-        className="flex flex-col items-center h-full"
+        className="flex items-center h-full w-full"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
@@ -73,9 +76,12 @@ const AnswerInput = () => {
           onChange={(e) => setWord(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder={`남은 정답 시도 횟수: ${hearts}회`}
-          className="placeholder- border-2 border-black w-full h-full px-4 py-2 rounded-md shadow-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="placeholder-gray-400 border-4 border-black w-full h-full px-4 py-2 rounded-md shadow-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </form>
+      <div className="w-full text-sm text-center px-2">
+        enter 키로 활성화, enter키로 정답 제출
+      </div>
     </div>
   );
 };
