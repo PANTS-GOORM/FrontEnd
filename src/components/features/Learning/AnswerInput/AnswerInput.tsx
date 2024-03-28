@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import heartImage from "../../../../assets/img/learning/heart.png";
 
 // Props 타입 정의
 // interface CurrentRoundProps {
@@ -7,15 +6,9 @@ import heartImage from "../../../../assets/img/learning/heart.png";
 // }
 // const CurrentRound: React.FC<CurrentRoundProps> = ({ round }) => {
 
-const remainingTries = 3;
-
 const AnswerInput = () => {
   const [word, setWord] = useState<string>("");
   const [hearts, setHearts] = useState<number>(3);
-  const [correctAnswer, setCorrectAnswer] = useState<{
-    isCorrect: boolean;
-    sentence: string;
-  } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     const handleGlobalKeyPress = (e: KeyboardEvent) => {
@@ -42,12 +35,10 @@ const AnswerInput = () => {
     // 사용자 입력에서 모든 공백을 제거
     const inputSentence = word.replace(/\s+/g, "");
     if (inputSentence === desiredSentence.replace(/\s+/g, "")) {
-      // 정답인 경우
-      setCorrectAnswer({ isCorrect: true, sentence: word }); // 원래 입력된 문장을 표시
+      console.log("정답입니다!!");
     } else {
       // 틀린 경우 하트를 하나 제거하고 정답 상태를 초기화합니다.
       setHearts(hearts - 1);
-      setCorrectAnswer(null);
     }
     setWord(""); // 입력 필드 초기화
   };
