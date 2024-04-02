@@ -2,27 +2,16 @@ import React from "react";
 import "./App.css";
 import Learning from "./pages/PersonalTrainningPage/LearningPage";
 import Main from "./pages/MainPage/Main";
-import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "./pages/AdminPage/Admin";
 import AdminWordList from "./pages/AdminPage/AdminWordList";
 import AdminWordRegist from "./pages/AdminPage/AdminWordRegist";
+import Header from "./components/header/Header";
 
 function App() {
   return (
     <Router>
-      <nav>
-        <ul>
-          <div>
-            <Link to="/">Main</Link>
-          </div>
-          <div>
-            <Link to="/learning">Learning</Link>
-          </div>
-          <div>
-            <Link to="/admin">관리자 페이지</Link>
-          </div>
-        </ul>
-      </nav>
+      <Header />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/learning" element={<Learning />} />

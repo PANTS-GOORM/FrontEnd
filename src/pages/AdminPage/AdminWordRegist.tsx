@@ -5,7 +5,7 @@ const AdminWordRegist: React.FC = () => {
   const [word, setWord] = useState("");
   const { words, addWord } = useStore((state) => state);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setWord(e.target.value);
   };
   const handleClickAddWord = () => {
