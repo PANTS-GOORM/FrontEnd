@@ -14,15 +14,6 @@ interface UserState {
   logoutUser: () => void;
 }
 
-const imgURL: string =
-  "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910";
-const exUser: User = {
-  userToken: "123asdzxc",
-  userName: "KimMinBeom",
-  profileImg: `${imgURL}`,
-  isAdmin: false,
-};
-
 const userStore = create(
   persist<UserState>(
     (set) => ({
