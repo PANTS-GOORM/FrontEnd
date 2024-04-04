@@ -10,10 +10,11 @@ const Header = () => {
   const handleLogin = () => {
     // exUser 정보로 로그인
     loginUser({
+      userEmail: "beom0109@naver.com",
       userToken: "123asdzxc",
       userName: "KimMinBeom",
       profileImg: `${imgURL}`, // 실제 사용 가능한 이미지 URL로 교체 필요
-      isAdmin: true,
+      isAdmin: false,
     });
   };
 
