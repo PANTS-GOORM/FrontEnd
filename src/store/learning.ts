@@ -1,4 +1,3 @@
-// src/stores/learningStore.ts (또는 .js 파일이라면 .js 확장자를 사용)
 import create from "zustand";
 import axios from "axios";
 
