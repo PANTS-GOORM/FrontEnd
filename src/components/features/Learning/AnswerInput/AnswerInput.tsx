@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
+import learningStore from "../../../../store/learning"; // Zustand store의 경로를 올바르게 지정해주세요.
+import SuccessModal from "../Modal/SuccessModal"; // 올바른 경로로 수정
+import FailModal from "../Modal/FailModal"; // 올바른 경로로 수정
 
-// Props 타입 정의
-// interface CurrentRoundProps {
-//   round: number;
-// }
-// const CurrentRound: React.FC<CurrentRoundProps> = ({ round }) => {
-
-const AnswerInput = () => {
+const AnswerInput: React.FC = () => {
   const [word, setWord] = useState<string>("");
-  const [hearts, setHearts] = useState<number>(3);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const hearts = learningStore((state) => state.hearts);
+  const removeHeart = learningStore((state) => state.removeHeart);
+  // const resetHearts = learningStore((state) => state.resetHearts);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+  const [showFailModal, setShowFailModal] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const nextRound = learningStore((state) => state.nextRound);
   useEffect(() => {
     const handleGlobalKeyPress = (e: KeyboardEvent) => {
       if (e.key === "Enter" && document.activeElement !== inputRef.current) {
@@ -25,37 +27,50 @@ const AnswerInput = () => {
     };
   }, []);
 
-  const checkSentence = () => {
-    if (hearts === 0) {
-      setWord("");
-      return;
-    }
+  useEffect(() => {
+    if (showSuccessModal || showFailModal) {
+      const timer = setTimeout(() => {
+        setShowSuccessModal(false);
+        setShowFailModal(false);
+        nextRound();
+      }, 2000); // 모달을 2초 동안 보여준 후 숨깁니다.
 
-    const desiredSentence = "누워서 떡 먹기"; // 공백 없는 형태로 설정
-    // 사용자 입력에서 모든 공백을 제거
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessModal, showFailModal, nextRound]);
+
+  const checkSentence = () => {
+    const desiredSentence = "누워서 떡 먹기";
     const inputSentence = word.replace(/\s+/g, "");
+
     if (inputSentence === desiredSentence.replace(/\s+/g, "")) {
       console.log("정답입니다!!");
+      setShowSuccessModal(true);
+      nextRound(); // 다음 라운드로 넘어가기
     } else {
-      // 틀린 경우 하트를 하나 제거하고 정답 상태를 초기화합니다.
-      setHearts(hearts - 1);
+      if (hearts === 1) {
+        setShowFailModal(true);
+        nextRound(); // 실패 모달 표시 후 다음 라운드로
+      } else {
+        removeHeart();
+      }
     }
-    setWord(""); // 입력 필드 초기화
+    setWord("");
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // 폼 제출 방지
-      if (inputRef.current && document.activeElement === inputRef.current) {
-        checkSentence();
-      } else {
-        inputRef.current?.focus();
-      }
+      e.preventDefault();
+      checkSentence();
     }
   };
 
   return (
     <div className="flex flex-col items-center p-4 h-32">
+      {showSuccessModal && (
+        <SuccessModal onClose={() => setShowSuccessModal(false)} />
+      )}
+      {showFailModal && <FailModal onClose={() => setShowFailModal(false)} />}
       <form
         className="flex items-center h-full w-full"
         onSubmit={(e) => e.preventDefault()}

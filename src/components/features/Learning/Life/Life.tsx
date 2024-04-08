@@ -1,14 +1,10 @@
 import React from "react";
 import heartIcon from "../../../../assets/img/learning/heart.png";
-
-// Props 타입 정의
-// interface CurrentRoundProps {
-//   round: number;
-// }
-// const CurrentRound: React.FC<CurrentRoundProps> = ({ round }) => {
+import learningStore from "../../../../store/learning"; // 올바른 경로로 수정
 
 const Life = () => {
-  const hearts = 3;
+  const hearts = learningStore((state) => state.hearts); // Zustand 스토어에서 하트 수 가져오기
+
   const heartArr: React.ReactNode[] = [];
 
   for (let i = 0; i < hearts; ++i) {

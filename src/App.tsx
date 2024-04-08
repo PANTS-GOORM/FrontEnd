@@ -8,6 +8,7 @@ import AdminWordList from "./pages/AdminPage/AdminWordList";
 import AdminWordRegist from "./pages/AdminPage/AdminWordRegist";
 import Header from "./components/header/Header";
 import MyPage from "./pages/MyPage/MyPage";
+import MySetting from "./pages/MyPage/MySetting";
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/learning" element={<Learning />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/mysetting" element={<MySetting />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/wordlist" element={<AdminWordList />} />
         <Route path="/admin/wordregist" element={<AdminWordRegist />} />

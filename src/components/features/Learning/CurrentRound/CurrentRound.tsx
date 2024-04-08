@@ -1,14 +1,9 @@
 import React from "react";
-
-// Props 타입 정의
-// interface CurrentRoundProps {
-//   round: number;
-// }
-// const CurrentRound: React.FC<CurrentRoundProps> = ({ round }) => {
-
-const round = 1;
+import learningStore from "../../../../store/learning"; // 경로는 실제 상황에 맞게 조정해주세요.
 
 const CurrentRound = () => {
+  const round = learningStore((state) => state.round);
+
   return (
     <div className="flex justify-center items-center">
       <div className="flex items-center text-lg bg-white bg-opacity-70 rounded p-4 text-center">

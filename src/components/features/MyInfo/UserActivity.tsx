@@ -9,7 +9,7 @@ const UserActivity: React.FC = () => {
         {/* 각 활동 링크를 리스트 아이템으로 구성합니다. */}
         <li>
           <a
-            href="/points"
+            href="/words"
             className="text-sm text-blue-600 hover:text-blue-500"
           >
             어휘목록
@@ -17,7 +17,7 @@ const UserActivity: React.FC = () => {
         </li>
         <li>
           <a
-            href="/settings"
+            href="/mypage/mysetting"
             className="text-sm text-blue-600 hover:text-blue-500"
           >
             설정
