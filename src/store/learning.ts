@@ -1,6 +1,5 @@
-// src/stores/wordStore.js
 import create from "zustand";
-import axios from "axios"; // Axios 직접 사용
+import axios from "axios";
 
 interface GuestStudyContent {
   vocabulary: string;
@@ -15,11 +14,15 @@ interface WordState {
   removeWord: (word: string) => void;
   learnedWords: number;
   increaseLearnedWords: () => void;
-  contents: GuestStudyContent[]; // DTO의 전체 데이터를 저장할 상태 추가
-  loadContents: (type: string, amount: number) => Promise<void>; // 서버로부터 내용 목록을 가져오는 함수 추가
+  contents: GuestStudyContent[];
+  loadContents: (type: string, amount: number) => Promise<void>;
+  hearts: number; // 하트의 수
+  round: number; // 라운드 수
+  removeHeart: () => void; // 하트 제거
+  nextRound: () => void; // 다음 라운드로 넘어가기
 }
 
-const wordStore = create<WordState>((set) => ({
+const learningStore = create<WordState>((set) => ({
   words: [],
   addWord: (word) => set((state) => ({ words: [...state.words, word] })),
   removeWord: (word) =>
@@ -27,18 +30,22 @@ const wordStore = create<WordState>((set) => ({
   learnedWords: 0,
   increaseLearnedWords: () =>
     set((state) => ({ learnedWords: state.learnedWords + 1 })),
-  contents: [], // 초기 상태는 빈 배열
+  contents: [],
   loadContents: async (type, amount) => {
     try {
       const response = await axios.get(
         `http://localhost:8080/vocab/random?type=${type}&amount=${amount}`
       );
       set({ contents: response.data });
-      console.log("됨?");
     } catch (error) {
       console.error("Error loading contents:", error);
     }
   },
+  hearts: 3,
+  round: 1, // 라운드 수 초기화
+  removeHeart: () =>
+    set((state) => ({ hearts: Math.max(0, state.hearts - 1) })),
+  nextRound: () => set((state) => ({ round: state.round + 1, hearts: 3 })), // 다음 라운드로 넘어가며 하트 수도 초기화
 }));
 
-export default wordStore;
+export default learningStore;

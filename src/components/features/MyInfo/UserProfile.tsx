@@ -16,9 +16,6 @@ const UserProfile: React.FC = () => {
         <p className="text-lg font-medium text-gray-900">{user.userName}</p>
         {user.isAdmin && <p className="text-sm text-red-500">Admin</p>}
       </div>
-      <div>
-        <p className="text-lg font-medium text-gray-900">{user.userEmail}</p>
-      </div>
     </div>
   ) : null;
 };
