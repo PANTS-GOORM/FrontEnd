@@ -64,6 +64,9 @@ devDependencies:
   '@babel/core':
     specifier: ^7.24.4
     version: 7.24.4
+  '@babel/plugin-transform-runtime':
+    specifier: ^7.24.3
+    version: 7.24.3(@babel/core@7.24.4)
   '@babel/preset-env':
     specifier: ^7.24.4
     version: 7.24.4(@babel/core@7.24.4)
@@ -88,9 +91,6 @@ devDependencies:
   babel-jest:
     specifier: ^29.7.0
     version: 29.7.0(@babel/core@7.24.4)
-  jest:
-    specifier: ^29.7.0
-    version: 29.7.0(@types/node@16.18.91)
   postcss:
     specifier: ^8.4.38
     version: 8.4.38
@@ -1236,7 +1236,6 @@ packages:
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@babel/plugin-transform-shorthand-properties@7.24.1(@babel/core@7.24.4):
     resolution: {integrity: sha512-LyjVB1nsJ6gTTUKRjRWx9C1s9hE7dLfP/knKdrfeH9UPtAGjYGgxIbFfx7xyLIEWs7Xe1Gnf8EWiUqfjLhInZA==}

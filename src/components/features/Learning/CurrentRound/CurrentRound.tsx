@@ -1,5 +1,5 @@
 import React from "react";
-import learningStore from "../../../../store/learning"; // 경로는 실제 상황에 맞게 조정해주세요.
+import learningStore from "../../../../store/learning";
 
 const CurrentRound = () => {
   const round = learningStore((state) => state.round);
