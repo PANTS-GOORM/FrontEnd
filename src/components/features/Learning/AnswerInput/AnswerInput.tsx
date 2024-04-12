@@ -12,6 +12,9 @@ const AnswerInput: React.FC = () => {
   const [showFailModal, setShowFailModal] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const nextRound = learningStore((state) => state.nextRound);
+  const vocabulary = learningStore(
+    (state) => state.contents[state.round - 1]?.vocabulary || ""
+  );
   useEffect(() => {
     const handleGlobalKeyPress = (e: KeyboardEvent) => {
       if (e.key === "Enter" && document.activeElement !== inputRef.current) {
@@ -32,7 +35,6 @@ const AnswerInput: React.FC = () => {
       const timer = setTimeout(() => {
         setShowSuccessModal(false);
         setShowFailModal(false);
-        nextRound();
       }, 2000); // 모달을 2초 동안 보여준 후 숨깁니다.
 
       return () => clearTimeout(timer);
@@ -40,10 +42,9 @@ const AnswerInput: React.FC = () => {
   }, [showSuccessModal, showFailModal, nextRound]);
 
   const checkSentence = () => {
-    const desiredSentence = "누워서 떡 먹기";
     const inputSentence = word.replace(/\s+/g, "");
 
-    if (inputSentence === desiredSentence.replace(/\s+/g, "")) {
+    if (inputSentence === vocabulary.replace(/\s+/g, "")) {
       console.log("정답입니다!!");
       setShowSuccessModal(true);
       nextRound(); // 다음 라운드로 넘어가기
