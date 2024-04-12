@@ -1,20 +1,16 @@
 import create from "zustand";
 import axios from "axios";
 
-interface GuestStudyContent {
-  vocabulary: string;
-  description: string;
-  contentURL: string;
-  problemDescription: string;
+interface StudyContent {
+  vocabulary: string; // 정답
+  contentURL: string; // 이미지
+  problemDescription: string; // 설명
 }
 
 interface WordState {
-  words: string[];
-  addWord: (word: string) => void;
-  removeWord: (word: string) => void;
   learnedWords: number;
   increaseLearnedWords: () => void;
-  contents: GuestStudyContent[];
+  contents: StudyContent[];
   loadContents: (type: string, amount: number) => Promise<void>;
   hearts: number; // 하트의 수
   round: number; // 라운드 수
@@ -23,14 +19,29 @@ interface WordState {
 }
 
 const learningStore = create<WordState>((set) => ({
-  words: [],
-  addWord: (word) => set((state) => ({ words: [...state.words, word] })),
-  removeWord: (word) =>
-    set((state) => ({ words: state.words.filter((w) => w !== word) })),
   learnedWords: 0,
   increaseLearnedWords: () =>
     set((state) => ({ learnedWords: state.learnedWords + 1 })),
-  contents: [],
+  contents: [
+    {
+      vocabulary: "1라운드",
+      contentURL:
+        "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910",
+      problemDescription: "쉽게 할 수 있는 일",
+    },
+    {
+      vocabulary: "2라운드",
+      contentURL:
+        "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910",
+      problemDescription: "쉽게 할 수 있는 일",
+    },
+    {
+      vocabulary: "3라운드",
+      contentURL:
+        "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910",
+      problemDescription: "쉽게 할 수 있는 일",
+    },
+  ],
   loadContents: async (type, amount) => {
     try {
       const response = await axios.get(
