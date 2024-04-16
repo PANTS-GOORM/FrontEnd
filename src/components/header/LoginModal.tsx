@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import Modal from "react-modal";
 import KakaoLogo from "../../assets/img/header/KakaoLogo.png";
 import GithubLogo from "../../assets/img/header/GithubLogo.png";
