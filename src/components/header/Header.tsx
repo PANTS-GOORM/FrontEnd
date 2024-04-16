@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import userStore from "../../store/user"; // 스토어 경로는 실제 구조에 맞게 조정하세요.
+import LoginModal from "./LoginModal";
 
 const Header = () => {
   // Zustand 스토어의 상태와 액션을 사용
   const { user, loginUser, logoutUser } = userStore();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const imgURL: string =
     "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910";
 
@@ -21,6 +23,16 @@ const Header = () => {
   // 로그아웃 버튼 클릭 핸들러
   const handleLogout = () => {
     logoutUser(); // 로그아웃
+  };
+
+  // 로그인 모달 열기
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  // 로그인 모달 닫기
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
   return (
@@ -46,12 +58,12 @@ const Header = () => {
                 >
                   로그인
                 </button>
-                <a
-                  href="/signup"
+                <button
+                  onClick={openModal}
                   className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
                   회원가입
-                </a>
+                </button>
               </>
             ) : (
               <>
@@ -72,6 +84,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
+      <LoginModal isOpen={modalIsOpen} onRequestClose={closeModal} />
     </header>
   );
 };
