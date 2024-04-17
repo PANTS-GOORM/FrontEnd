@@ -1,4 +1,3 @@
-// 파일 경로: src/components/UserProfile.tsx
 import React from "react";
 import userStore from "../../../store/user"; // 스토어 가져오기
 
@@ -10,10 +9,13 @@ const UserProfile: React.FC = () => {
       <img
         className="h-12 w-12 rounded-full"
         src={user.profileImg}
-        alt={`${user.userName}'s profile`}
+        alt={`${user.nickname}'s profile`} // 닉네임을 alt 텍스트로 사용
       />
       <div>
-        <p className="text-lg font-medium text-gray-900">{user.userName}</p>
+        <p className="text-lg font-medium text-gray-900">{user.nickname}</p>{" "}
+        {/* 닉네임을 표시 */}
+        <p className="text-sm text-gray-600">{user.email}</p>{" "}
+        {/* 이메일을 표시 */}
         {user.isAdmin && <p className="text-sm text-red-500">Admin</p>}
       </div>
     </div>
