@@ -65,8 +65,8 @@ const AdminWordRegist: React.FC = () => {
               value={description}
               onChange={handleDescriptionChange}
               placeholder="어휘 설명 입력"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              rows={4}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              rows={8}
             />
           </div>
           <div className="flex items-center justify-center space-x-4">
