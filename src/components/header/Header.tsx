@@ -4,21 +4,8 @@ import LoginModal from "./LoginModal";
 
 const Header = () => {
   // Zustand 스토어의 상태와 액션을 사용
-  const { user, loginUser, logoutUser } = userStore();
+  const { user, logoutUser } = userStore();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const imgURL: string =
-    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910";
-
-  const handleLogin = () => {
-    // exUser 정보로 로그인
-    loginUser({
-      userEmail: "beom0109@naver.com",
-      userToken: "123asdzxc",
-      userName: "KimMinBeom",
-      profileImg: `${imgURL}`, // 실제 사용 가능한 이미지 URL로 교체 필요
-      isAdmin: false,
-    });
-  };
 
   // 로그아웃 버튼 클릭 핸들러
   const handleLogout = () => {
@@ -26,12 +13,12 @@ const Header = () => {
   };
 
   // 로그인 모달 열기
-  const openModal = () => {
+  const openLoginModal = () => {
     setModalIsOpen(true);
   };
 
   // 로그인 모달 닫기
-  const closeModal = () => {
+  const closeLoginModal = () => {
     setModalIsOpen(false);
   };
 
@@ -53,16 +40,10 @@ const Header = () => {
             {!user ? (
               <>
                 <button
-                  onClick={handleLogin}
-                  className="text-gray-800 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-                >
-                  로그인
-                </button>
-                <button
-                  onClick={openModal}
+                  onClick={openLoginModal}
                   className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
-                  회원가입
+                  로그인
                 </button>
               </>
             ) : (
@@ -84,7 +65,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <LoginModal isOpen={modalIsOpen} onRequestClose={closeModal} />
+      <LoginModal isOpen={modalIsOpen} onRequestClose={closeLoginModal} />
     </header>
   );
 };
