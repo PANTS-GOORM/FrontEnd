@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import userStore from "../../store/user";
 
 const GetUserInfo = () => {
-  const { user, loginUser, logoutUser } = userStore();
+  const { loginUser } = userStore();
   const navigate = useNavigate();
 
   useEffect(() => {
