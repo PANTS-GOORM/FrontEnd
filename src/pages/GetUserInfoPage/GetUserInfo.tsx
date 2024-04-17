@@ -30,7 +30,7 @@ const GetUserInfo = () => {
         console.error("Error parsing user JSON:", error);
       }
     }
-  }, []);
+  }, [navigate, loginUser]);
 
   return (
     <>
