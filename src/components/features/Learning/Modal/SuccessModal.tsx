@@ -1,15 +1,20 @@
 import React from "react";
 import Modal from "./Modal";
-
+import learningStore from "../../../../store/learning";
 interface SuccessModalProps {
   onClose: () => void;
 }
 
 const SuccessModal: React.FC<SuccessModalProps> = ({ onClose }) => (
   <Modal onClose={onClose} color="green">
-    {" "}
-    {/* 색상 전달 */}
-    <p className="text-xl text-center">성공!</p>
+    <div>성공하셨습니다</div>
+    <div>
+      정답은{" "}
+      {learningStore(
+        (state) => state.contents[state.round - 2]?.vocabulary || ""
+      )}{" "}
+      입니다.
+    </div>
   </Modal>
 );
 

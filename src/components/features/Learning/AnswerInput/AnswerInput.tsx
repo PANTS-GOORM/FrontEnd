@@ -32,12 +32,25 @@ const AnswerInput: React.FC = () => {
 
   useEffect(() => {
     if (showSuccessModal || showFailModal) {
+      // 모달이 열리면 페이지의 상호작용을 막습니다.
+      document.body.style.pointerEvents = "none";
+      nextRound(); // 실패 모달 표시 후 다음 라운드로
+      if (inputRef.current) {
+        inputRef.current.blur(); // 모달이 보일 때 포커스 제거
+      }
+
       const timer = setTimeout(() => {
         setShowSuccessModal(false);
         setShowFailModal(false);
+        // 모달이 닫히면 페이지의 상호작용을 다시 허용합니다.
+        document.body.style.pointerEvents = "auto";
       }, 2000); // 모달을 2초 동안 보여준 후 숨깁니다.
 
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        // 클린업 함수에서도 상호작용을 다시 허용합니다. 모달이 빠르게 재표시될 때 문제를 방지합니다.
+        document.body.style.pointerEvents = "auto";
+      };
     }
   }, [showSuccessModal, showFailModal, nextRound]);
 
@@ -47,11 +60,9 @@ const AnswerInput: React.FC = () => {
     if (inputSentence === vocabulary.replace(/\s+/g, "")) {
       console.log("정답입니다!!");
       setShowSuccessModal(true);
-      nextRound(); // 다음 라운드로 넘어가기
     } else {
       if (hearts === 1) {
         setShowFailModal(true);
-        nextRound(); // 실패 모달 표시 후 다음 라운드로
       } else {
         removeHeart();
       }

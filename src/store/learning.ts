@@ -22,30 +22,14 @@ const learningStore = create<WordState>((set) => ({
   learnedWords: 0,
   increaseLearnedWords: () =>
     set((state) => ({ learnedWords: state.learnedWords + 1 })),
-  contents: [
-    {
-      vocabulary: "1라운드",
-      contentURL:
-        "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910",
-      problemDescription: "쉽게 할 수 있는 일",
-    },
-    {
-      vocabulary: "2라운드",
-      contentURL:
-        "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910",
-      problemDescription: "쉽게 할 수 있는 일",
-    },
-    {
-      vocabulary: "3라운드",
-      contentURL:
-        "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbmxKXWtkUK3IrPeJrE1rcHRpnYtBg7OsTrnJyihDYI41eTl_uW8RK_BWKdzWUuVaSagbBffI7FEKjZzeFGwxF6w7YO=w958-h910",
-      problemDescription: "쉽게 할 수 있는 일",
-    },
-  ],
+  contents: [],
   loadContents: async (type, amount) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/vocab/random?type=${type}&amount=${amount}`
+        `${process.env.REACT_APP_API_URL}/vocab/random?type=${type}&amount=${amount}`,
+        {
+          withCredentials: true,
+        }
       );
       set({ contents: response.data });
     } catch (error) {
