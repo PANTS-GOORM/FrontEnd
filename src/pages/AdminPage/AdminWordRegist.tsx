@@ -30,7 +30,9 @@ const AdminWordRegist: React.FC = () => {
     e.preventDefault();
     const adminWord: AdminWord = { vocabulary, description, type };
     axios
-      .post("MY-END-POINT", adminWord) // 엔드포인트 변경 필요
+      .post(`http://localhost:8081/admin/wordregist`, adminWord, {
+        withCredentials: true,
+      })
       .then((response) => {
         if (response.status === 200) {
           alert("등록 성공!");
@@ -106,7 +108,7 @@ const AdminWordRegist: React.FC = () => {
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            단어 등록
+            어휘 등록
           </button>
         </form>
       </div>
