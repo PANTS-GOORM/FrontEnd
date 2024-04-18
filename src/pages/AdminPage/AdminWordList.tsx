@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Word {
   id: number;
@@ -10,10 +11,12 @@ interface Word {
   createdDate: string;
 }
 
-function AdminWordList() {
+const AdminWordList: React.FC = () => {
   const [words, setWords] = useState<Word[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(10);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -88,22 +91,33 @@ function AdminWordList() {
             ))}
           </tbody>
         </table>
-        <nav className="flex justify-center mt-4">
-          {pageNumbers.map((number) => (
-            <div
-              key={number}
-              onClick={() => setCurrentPage(number)}
-              className={`px-3 py-2 mx-1 text-white rounded hover:bg-blue-700 ${
-                currentPage === number ? "bg-blue-700" : "bg-gray-500"
-              }`}
-            >
-              {number}
-            </div>
-          ))}
-        </nav>
+        <div className="flex items-center justify-between mt-4">
+          <div className="invisible">
+            <button>Placeholder</button>
+          </div>
+          <nav className="flex justify-center flex-grow">
+            {pageNumbers.map((number) => (
+              <div
+                key={number}
+                onClick={() => setCurrentPage(number)}
+                className={`px-3 py-2 mx-1 text-white rounded hover:bg-blue-700 ${
+                  currentPage === number ? "bg-blue-700" : "bg-gray-500"
+                }`}
+              >
+                {number}
+              </div>
+            ))}
+          </nav>
+          <button
+            onClick={() => navigate("/admin")}
+            className="px-4 py-2 text-white bg-gray-500 rounded hover:bg-blue-700"
+          >
+            관리자 페이지로
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default AdminWordList;
