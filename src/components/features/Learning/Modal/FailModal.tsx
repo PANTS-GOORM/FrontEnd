@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "./Modal";
-
+import learningStore from "../../../../store/learning";
 interface FailModalProps {
   onClose: () => void;
 }
@@ -9,7 +9,14 @@ const FailModal: React.FC<FailModalProps> = ({ onClose }) => (
   <Modal onClose={onClose} color="red">
     {" "}
     {/* 색상 전달 */}
-    <p className="text-xl text-center">실패...</p>
+    <div>실패하셨습니다</div>
+    <div style={{ color: "green" }}>
+      정답은{" "}
+      {learningStore(
+        (state) => state.contents[state.round - 2]?.vocabulary || ""
+      )}{" "}
+      입니다.
+    </div>
   </Modal>
 );
 

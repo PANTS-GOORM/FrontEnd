@@ -10,10 +10,10 @@ const UserProfile: React.FC = () => {
       <img
         className="h-12 w-12 rounded-full"
         src={user.profileImg}
-        alt={`${user.userName}'s profile`}
+        alt={`${user.nickname}'s profile`}
       />
       <div>
-        <p className="text-lg font-medium text-gray-900">{user.userName}</p>
+        <p className="text-lg font-medium text-gray-900">{user.nickname}</p>
         {user.isAdmin && <p className="text-sm text-red-500">Admin</p>}
       </div>
     </div>
