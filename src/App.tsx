@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Learning from "./pages/PersonalTrainningPage/LearningPage";
+import LearningPage from "./pages/PersonalTrainningPage/LearningPage";
 import Main from "./pages/MainPage/Main";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "./pages/AdminPage/Admin";
@@ -17,7 +17,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/learning" element={<Learning />} />
+        <Route path="/learning" element={<LearningPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/mysetting" element={<MySetting />} />
         <Route
