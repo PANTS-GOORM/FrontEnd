@@ -45,7 +45,7 @@ const learningStore = create<WordState>((set) => ({
   loadContents: async (type, amount) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/vocab/random?type=${type}&amount=${amount}`
+        `${process.env.REACT_APP_API_URL}/vocab/random?type=${type}&amount=${amount}`
       );
       set({ contents: response.data });
     } catch (error) {
