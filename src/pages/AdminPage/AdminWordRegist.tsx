@@ -11,6 +11,7 @@ const AdminWordRegist: React.FC = () => {
   const [vocabulary, setVocabulary] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleVocabularyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVocabulary(e.target.value);
@@ -24,25 +25,36 @@ const AdminWordRegist: React.FC = () => {
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setType(e.target.value);
+    setIsButtonDisabled(false);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const adminWord: AdminWord = { vocabulary, description, type };
     axios
-      .post(`http://localhost:8081/admin/wordregist`, adminWord, {
+      .post(`${process.env.REACT_APP_API_URL}/admin/wordregist`, adminWord, {
         withCredentials: true,
       })
       .then((response) => {
         if (response.status === 200) {
           alert("등록 성공!");
-        } else if (response.status === 409) {
-          alert("중복된 어휘입니다.");
+          setVocabulary("");
+          setDescription("");
+          setType("");
+          setIsButtonDisabled(true);
         }
       })
       .catch((error) => {
         console.error(error);
-        alert("등록 중 오류가 발생했습니다.");
+        if (error.response.status === 409) {
+          alert("중복된 어휘입니다.");
+          setVocabulary("");
+          setDescription("");
+          setType("");
+          setIsButtonDisabled(true);
+        } else {
+          alert("등록 중 오류가 발생했습니다.");
+        }
       });
   };
 
@@ -106,7 +118,10 @@ const AdminWordRegist: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            disabled={isButtonDisabled}
+            className={`w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+              isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
             어휘 등록
           </button>
