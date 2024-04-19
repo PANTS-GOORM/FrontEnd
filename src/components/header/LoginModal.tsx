@@ -22,7 +22,7 @@ const customStyles = {
 };
 
 const handleOAuth2Login = (clientRegistration) => {
-  window.location.href = `${process.env.REACT_OAUTH_API_URL}/oauth2/authorization/${clientRegistration}`;
+  window.location.href = `${process.env.REACT_APP_OAUTH_URL}/oauth2/authorization/${clientRegistration}`;
 };
 
 // SignupModal 컴포넌트 정의
