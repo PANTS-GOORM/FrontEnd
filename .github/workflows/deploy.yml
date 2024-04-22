@@ -17,10 +17,10 @@ jobs:
           node-version: "20"
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
-          version: 8
-          run_install: false
+          version: 7
+          run_install: true
 
       - name: Get pnpm store directory
         shell: bash
@@ -43,7 +43,8 @@ jobs:
       - name: Extract version from merge commit message
         id: extract_version
         run: |
-          echo "version=$(echo '${{ github.event.head_commit.message }}' | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')" >> $GITHUB_ENV
+          VERSION=$(echo "${{ github.event.head_commit.message }}" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          echo "version=$VERSION" >> $GITHUB_ENV
 
       - name: Print version
         run: echo "Version is $version"
