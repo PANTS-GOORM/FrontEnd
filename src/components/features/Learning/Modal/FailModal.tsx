@@ -13,7 +13,7 @@ const FailModal: React.FC<FailModalProps> = ({ onClose }) => (
     <div style={{ color: "green" }}>
       정답은{" "}
       {learningStore(
-        (state) => state.contents[state.round - 2]?.vocabulary || ""
+        (state) => state.contents[state.round - 1]?.vocabulary || ""
       )}{" "}
       입니다.
     </div>
