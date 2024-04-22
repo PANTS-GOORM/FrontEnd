@@ -11,6 +11,7 @@ import MyPage from "./pages/MyPage/MyPage";
 import MySetting from "./pages/MyPage/MySetting";
 import GetUserInfo from "./pages/GetUserInfoPage/GetUserInfo";
 import RequireAdmin from "./pages/AdminPage/RequireAdmin";
+import ResultPage from "./pages/PersonalTrainningPage/ResultPage";
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/learning" element={<LearningPage />} />
+        <Route path="/result" element={<ResultPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/mysetting" element={<MySetting />} />
         <Route
