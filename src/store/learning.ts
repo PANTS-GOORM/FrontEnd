@@ -10,23 +10,21 @@ interface StudyContent {
 interface WordState {
   learnedWordCount: number;
   amount: number;
-  // increaseAmount: (number) => void;
+  setAmount: (newAmount: number) => void;
   increaseLearnedWords: () => void;
   contents: StudyContent[];
   loadContents: (type: string, amount: number) => Promise<void>;
   hearts: number; // 하트의 수
   round: number; // 라운드 수
   removeHeart: () => void; // 하트 제거
-  resetAmount: () => void;
   resetRound: () => void;
   nextRound: () => void; // 다음 라운드로 넘어가기
 }
 
 const learningStore = create<WordState>((set) => ({
   learnedWordCount: 0,
-  amount: 3,
-  // increaseAmount: (addAmount) =>
-  //   set((state) => ({ amount: state.amount + addAmount })),
+  amount: 0,
+  setAmount: (newAmount: number) => set(() => ({ amount: newAmount })),
   increaseLearnedWords: () =>
     set((state) => ({ learnedWordCount: state.learnedWordCount + 1 })),
   contents: [],
@@ -39,9 +37,6 @@ const learningStore = create<WordState>((set) => ({
         }
       );
       set({ contents: response.data });
-      set((state) => ({
-        amount: state.amount + response.data.length,
-      }));
     } catch (error) {
       console.error("Error loading contents:", error);
     }
@@ -50,7 +45,6 @@ const learningStore = create<WordState>((set) => ({
   round: 1, // 라운드 수 초기화
   removeHeart: () =>
     set((state) => ({ hearts: Math.max(0, state.hearts - 1) })),
-  resetAmount: () => set(() => ({ amount: 3 })),
   resetRound: () => set(() => ({ round: 1 })),
   nextRound: () => set((state) => ({ round: state.round + 1, hearts: 3 })), // 다음 라운드로 넘어가며 하트 수도 초기화
 }));
