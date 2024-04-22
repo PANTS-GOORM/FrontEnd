@@ -14,6 +14,7 @@ const LearningPage: React.FC = () => {
   resetRound();
   useEffect(() => {
     loadContents("속담", amount);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="relative flex flex-col justify-center items-center h-screen gap-4">
