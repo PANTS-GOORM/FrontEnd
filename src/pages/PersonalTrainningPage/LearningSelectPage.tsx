@@ -5,7 +5,6 @@ import learningStore from "../../store/learning";
 const LearningSelectPage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
-
   const loadContents = learningStore((state) => state.loadContents);
   const resetRound = learningStore((state) => state.resetRound);
   const setAmount = learningStore((state) => state.setAmount);
