@@ -67,8 +67,6 @@ const AnswerInput: React.FC = () => {
     const inputSentence = word.replace(/\s+/g, "");
     if (inputSentence === vocabulary.replace(/\s+/g, "")) {
       increaseLearnedWords();
-      console.log(round);
-
       setShowSuccessModal(true);
       setTimeout(() => nextRound(), 2000); // 성공 모달 표시 후 2초 뒤 다음 라운드로
     } else {

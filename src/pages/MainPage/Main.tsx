@@ -4,7 +4,7 @@ const Main = () => {
   const main_menu = [
     {
       title: "어휘 학습",
-      link: "/learning",
+      link: "/learning/select",
       logo: "learning_logo.png",
     },
     {
