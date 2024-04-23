@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useOAuthAxios from "../../hook/useOAuthAxios";
 import userStore from "../../store/user"; // 스토어 경로는 실제 구조에 맞게 조정하세요.
 import LoginModal from "./LoginModal";
 
@@ -6,10 +7,17 @@ const Header = () => {
   // Zustand 스토어의 상태와 액션을 사용
   const { user, logoutUser } = userStore();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const axios = useOAuthAxios();
 
   // 로그아웃 버튼 클릭 핸들러
   const handleLogout = () => {
     logoutUser(); // 로그아웃
+
+    axios.post("/logout").catch((error) => {
+      console.error("Logout failed:", error);
+    });
+
+    window.location.href = `${process.env.REACT_APP_OAUTH_URL}/oauth2/logout`;
   };
 
   // 로그인 모달 열기

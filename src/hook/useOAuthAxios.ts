@@ -1,12 +1,12 @@
 import axios from "axios";
 
-function useAxios() {
+function useOAuthAxios() {
   const axiosInstance = axios.create({
     withCredentials: true,
-    // baseURL: process.env.REACT_APP_API_URL, 고민할 필요가 있을듯
+    baseURL: process.env.REACT_APP_OAUTH_URL,
   });
 
   return axiosInstance;
 }
 
-export default useAxios;
+export default useOAuthAxios;
