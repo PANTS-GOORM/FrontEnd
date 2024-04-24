@@ -16,19 +16,19 @@ const SolvedWordPage: React.FC = () => {
   const { user } = userStore();
 
   useEffect(() => {
-    fetchSolvedVocabulary();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/solved/vocabularylist?userEmail=${user?.email}`
+        );
+        setSolvedProblems(response.data);
+      } catch (error) {
+        console.error("Failed to fetch solved problems:", error);
+      }
+    };
 
-  const fetchSolvedVocabulary = async () => {
-    try {
-      const response = await axios.get(
-        `/solved/vocabularylist?userEmail=${user?.email}`
-      );
-      setSolvedProblems(response.data);
-    } catch (error) {
-      console.error("Failed to fetch solved problems:", error);
-    }
-  };
+    fetchData();
+  }, []);
 
   const months = [
     "1월",
