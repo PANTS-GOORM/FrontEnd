@@ -13,6 +13,7 @@ import MySetting from "./pages/MyPage/MySetting";
 import GetUserInfo from "./pages/GetUserInfoPage/GetUserInfo";
 import RequireAdmin from "./pages/AdminPage/RequireAdmin";
 import ResultPage from "./pages/PersonalTrainningPage/ResultPage";
+import SolvedWordPage from "./pages/SolvedWordPage/SolvedWordPage";
 function App() {
   return (
     <Router>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/result" element={<ResultPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/mysetting" element={<MySetting />} />
+        <Route path="/words" element={<SolvedWordPage />} />
         <Route
           path="/admin"
           element={
