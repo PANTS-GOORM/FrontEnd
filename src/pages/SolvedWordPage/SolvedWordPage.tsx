@@ -15,35 +15,20 @@ const SolvedWordPage: React.FC = () => {
 
   const { user } = userStore();
 
+  const fetchSolvedVocabulary = async () => {
+    try {
+      const response = await axios.get(
+        `/solved/vocabularylist?userEmail=${user?.email}`
+      );
+      setSolvedProblems(response.data);
+    } catch (error) {
+      console.error("Failed to fetch solved problems:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `/solved/vocabularylist?userEmail=${user?.email}`
-        );
-        setSolvedProblems(response.data);
-      } catch (error) {
-        console.error("Failed to fetch solved problems:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const months = [
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-    "5월",
-    "6월",
-    "7월",
-    "8월",
-    "9월",
-    "10월",
-    "11월",
-    "12월",
-  ];
+    fetchSolvedVocabulary();
+  }, [fetchSolvedVocabulary]);
 
   // 문제를 월별로 그룹화
   const problemsByMonth = solvedProblems.reduce((acc, problem) => {
