@@ -3,6 +3,8 @@ import learningStore from "../../../../store/learning"; // Zustand store의 경�
 import SuccessModal from "../Modal/SuccessModal"; // 올바른 경로로 수정
 import FailModal from "../Modal/FailModal"; // 올바른 경로로 수정
 import { useNavigate } from "react-router-dom";
+import useApiAxios from "../../../../hook/useApiAxios";
+import userStore from "../../../../store/user";
 
 const AnswerInput: React.FC = () => {
   const [word, setWord] = useState<string>("");
@@ -21,6 +23,9 @@ const AnswerInput: React.FC = () => {
   const increaseLearnedWords = learningStore(
     (state) => state.increaseLearnedWords
   );
+  const axios = useApiAxios();
+  const { user } = userStore();
+
   useEffect(() => {
     const handleGlobalKeyPress = (e: KeyboardEvent) => {
       if (e.key === "Enter" && document.activeElement !== inputRef.current) {
@@ -68,6 +73,7 @@ const AnswerInput: React.FC = () => {
     if (inputSentence === vocabulary.replace(/\s+/g, "")) {
       increaseLearnedWords();
       setShowSuccessModal(true);
+      registVocabulary(); // 정답을 맞췄을 때 서버에 등록
       setTimeout(() => nextRound(), 2000); // 성공 모달 표시 후 2초 뒤 다음 라운드로
     } else {
       if (hearts === 1) {
@@ -84,6 +90,18 @@ const AnswerInput: React.FC = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       checkSentence();
+    }
+  };
+
+  const registVocabulary = async () => {
+    try {
+      const userEmail = user?.email; // 사용자 이메일을 Zustand store에서 가져옵니다.
+      await axios.post(`/solved/vocabularyregist`, {
+        userEmail: userEmail,
+        substance: vocabulary,
+      });
+    } catch (error) {
+      console.error("Failed to register vocabulary:", error);
     }
   };
 
