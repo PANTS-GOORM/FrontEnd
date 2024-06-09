@@ -40,3 +40,5 @@ jobs:
 
       - name: Run build
         run: pnpm run build
+        env:
+          CI: false
