@@ -14,6 +14,8 @@ import GetUserInfo from "./pages/GetUserInfoPage/GetUserInfo";
 import RequireAdmin from "./pages/AdminPage/RequireAdmin";
 import ResultPage from "./pages/PersonalTrainningPage/ResultPage";
 import SolvedWordPage from "./pages/SolvedWordPage/SolvedWordPage";
+import RankLobby from "./pages/RankPage/RankLobby";
+import RankRoom from "./pages/RankPage/RankRoom";
 function App() {
   return (
     <Router>
@@ -26,6 +28,8 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/mysetting" element={<MySetting />} />
         <Route path="/words" element={<SolvedWordPage />} />
+        <Route path="/ranklobby" element={<RankLobby />} />
+        <Route path="/rankroom/:roomUUID" element={<RankRoom />} />
         <Route
           path="/admin"
           element={

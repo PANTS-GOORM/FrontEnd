@@ -10,7 +10,7 @@ const Main = () => {
     },
     {
       title: "경쟁 학습",
-      link: "/ranking",
+      link: "/ranklobby",
       logo: "ranking_logo.png",
     },
   ];
@@ -26,11 +26,11 @@ const Main = () => {
 
   // 메뉴 클릭 이벤트 핸들러
   const handleMenuClick = (link) => {
-    if (!user) {
-      openLoginModal(); // 로그인 되어 있지 않으면 모달 열기
-    } else {
-      window.location.href = link; // 로그인 되어 있으면 해당 링크로 이동
-    }
+    // if (!user) {
+    //   openLoginModal(); // 로그인 되어 있지 않으면 모달 열기
+    // } else {
+    window.location.href = link; // 로그인 되어 있으면 해당 링크로 이동
+    // }
   };
 
   return (
